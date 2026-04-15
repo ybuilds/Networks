@@ -17,6 +17,12 @@ def net_host_id(ip):
     if ip_cls == "D" or ip_cls == "E": return "NA", "NA"
     return None
 
+def custom_subnet(p):
+    mask = [0, 0, 0, 0]
+    for i in range(p):
+        mask[i//8] += 1 << (7 - i%8)
+    return ".".join(map(str, mask))
+
 def ip_to_num(ip):
     return (int(ip[0]) * 256**3) + (int(ip[1]) * 256**2) + (int(ip[2]) * 256**1) + (int(ip[3]) * 256**0)
 
@@ -63,3 +69,4 @@ subnets = 2 ** borrowed
 
 require = [64, 32, 64, 32]
 vlsm(ip_adrs, require)
+print(custom_subnet(prefix))
