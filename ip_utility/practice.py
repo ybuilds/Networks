@@ -1,5 +1,8 @@
 cls = {"A":8, "B":16, "C":24}
 
+def to_binary(ip):
+    return ".".join([format(int(i), "08b") for i in ip])
+
 def class_subnet(ip):
     first = int(ip[0])
     if 0 <= first <= 127:   return "A", "255.0.0.0"
@@ -69,4 +72,5 @@ subnets = 2 ** borrowed
 
 require = [64, 32, 64, 32]
 vlsm(ip_adrs, require)
+print("Binary IP:", to_binary(ip_adrs))
 print(custom_subnet(prefix))
